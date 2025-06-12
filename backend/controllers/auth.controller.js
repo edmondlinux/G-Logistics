@@ -8,13 +8,13 @@ export const signup = async (req, res) => {
 		if (userExists) {
 			return res.status(400).json({ message: "User already exists" });
 		}
-		
-		// Create user with admin role by default
+
+		// Create user with customer role by default
 		const user = await User.create({ 
 			name, 
 			email, 
 			password, 
-			role: "admin" 
+			role: "customer" 
 		});
 
 		// Set simple session cookie
