@@ -13,7 +13,7 @@ class EmailService {
       }
     });
 
-    this.adminEmail = process.env.ADMIN_EMAIL || 'admin@globallogistics.com';
+    this.adminEmail = process.env.ADMIN_EMAIL || 'surpport@g-logistics.site';
   }
 
   async sendShipmentNotification(shipment, recipientType = 'sender') {
