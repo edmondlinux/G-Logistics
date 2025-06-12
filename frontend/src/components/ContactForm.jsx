@@ -27,7 +27,7 @@ const ContactForm = () => {
 		setStatus(null);
 
 		try {
-			const response = await axios.post('/api/contact/send', formData);
+			const response = await axios.post('/contact/send', formData);
 
 			if (response.data.success) {
 				setStatus('success');
@@ -151,21 +151,21 @@ const ContactForm = () => {
 									<Phone className='w-6 h-6 text-emerald-600 mr-4' />
 									<div>
 										<p className='font-semibold text-gray-900'>Phone</p>
-										<p className='text-gray-600'>+1 (555) 123-4567</p>
+										<p className='text-gray-600'>support@g-logistics.site</p>
 									</div>
 								</div>
 								<div className='flex items-center'>
 									<Mail className='w-6 h-6 text-emerald-600 mr-4' />
 									<div>
 										<p className='font-semibold text-gray-900'>Email</p>
-										<p className='text-gray-600'>info@globallogistics.com</p>
+										<p className='text-gray-600'>support@g-logistics.site</p>
 									</div>
 								</div>
 								<div className='flex items-center'>
 									<MapPin className='w-6 h-6 text-emerald-600 mr-4' />
 									<div>
 										<p className='font-semibold text-gray-900'>Address</p>
-										<p className='text-gray-600'>123 Logistics Way, Shipping City, SC 12345</p>
+										<p className='text-gray-600'>GLOBAL LOGISTICS</p>
 									</div>
 								</div>
 							</div>
@@ -175,7 +175,7 @@ const ContactForm = () => {
 						<div className='bg-gray-300 rounded-xl h-64 flex items-center justify-center'>
 							<div className='text-center'>
 								<MapPin className='w-12 h-12 text-gray-500 mx-auto mb-2' />
-								<p className='text-gray-600'>Google Maps Embed Placeholder</p>
+								<p className='text-gray-600'>Google Map</p>
 							</div>
 						</div>
 					</div>

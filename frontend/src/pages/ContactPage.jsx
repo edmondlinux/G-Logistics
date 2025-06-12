@@ -51,7 +51,7 @@ const ContactPage = () => {
         message: formData.message
       };
 
-      const response = await axios.post('/api/contact/send', contactData);
+      const response = await axios.post('/contact/send', contactData);
 
       if (response.data.success) {
         setStatus('success');
@@ -78,28 +78,28 @@ const ContactPage = () => {
 
   const offices = [
     {
-      city: "New York",
-      address: "1234 Logistics Ave, New York, NY 10001",
-      phone: "+1 (555) 123-4567",
-      email: "ny@globallogistics.com"
+      city: "USA",
+      address: "USA",
+      phone: "support@g-logistics.site",
+      email: "support@g-logistics.site"
     },
     {
-      city: "Los Angeles",
-      address: "5678 Shipping Blvd, Los Angeles, CA 90210",
-      phone: "+1 (555) 987-6543",
-      email: "la@globallogistics.com"
+      city: "USA",
+      address: "USA",
+      phone: "support@g-logistics.site",
+      email: "support@g-logistics.site"
     },
     {
       city: "London",
-      address: "910 Freight Street, London, UK EC1A 1BB",
-      phone: "+44 20 7123 4567",
-      email: "london@globallogistics.com"
+      address: " UK ",
+      phone: "support@g-logistics.site",
+      email: "support@g-logistics.site"
     },
     {
       city: "Singapore",
-      address: "1122 Port Road, Singapore 018956",
-      phone: "+65 6123 4567",
-      email: "singapore@globallogistics.com"
+      address: " Singapore ",
+      phone: "support@g-logistics.site",
+      email: "support@g-logistics.site"
     }
   ];
 
@@ -323,7 +323,7 @@ const ContactPage = () => {
         </div>
       </section>
 
-      {/* Global Offices Section 
+      {/* Global Offices Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -368,7 +368,7 @@ const ContactPage = () => {
             ))}
           </div>
         </div>
-      </section>*/}
+      </section>
 
       {/* Map Section */}
       <section className="py-20 bg-gray-100">
@@ -381,7 +381,7 @@ const ContactPage = () => {
           >
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Find Us</h2>
             <p className="text-xl text-gray-600">
-              Visit our headquarters in New York
+              Visit our headquarters
             </p>
           </motion.div>
           <div className="bg-gray-300 rounded-xl h-96 flex items-center justify-center">
