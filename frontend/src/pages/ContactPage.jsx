@@ -8,9 +8,12 @@ import {
   MessageSquare,
   Send,
   Building,
-  Globe
+  Globe,
+  CheckCircle,
+  AlertCircle
 } from "lucide-react";
 import { useState } from "react";
+import axios from "../lib/axios";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -23,6 +26,9 @@ const ContactPage = () => {
     serviceType: "general"
   });
 
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState(null); // 'success', 'error', or null
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -31,10 +37,43 @@ const ContactPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
+    setLoading(true);
+    setStatus(null);
+
+    try {
+      // Send only the required fields that match the backend API
+      const contactData = {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message
+      };
+
+      const response = await axios.post('/api/contact/send', contactData);
+
+      if (response.data.success) {
+        setStatus('success');
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          company: "",
+          subject: "",
+          message: "",
+          serviceType: "general"
+        });
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setStatus('error');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const offices = [
@@ -180,12 +219,38 @@ const ContactPage = () => {
                   rows="6"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 />
+                
+                {/* Status Messages */}
+                {status === 'success' && (
+                  <div className='p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg flex items-center'>
+                    <CheckCircle className='w-5 h-5 mr-2' />
+                    Message sent successfully! We'll get back to you soon.
+                  </div>
+                )}
+
+                {status === 'error' && (
+                  <div className='p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg flex items-center'>
+                    <AlertCircle className='w-5 h-5 mr-2' />
+                    Failed to send message. Please try again.
+                  </div>
+                )}
+
                 <button
                   type="submit"
-                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition duration-300 flex items-center justify-center"
+                  disabled={loading}
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white px-8 py-4 rounded-lg font-semibold text-lg transition duration-300 flex items-center justify-center"
                 >
-                  <Send className="w-5 h-5 mr-2" />
-                  Send Message
+                  {loading ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5 mr-2" />
+                      Send Message
+                    </>
+                  )}
                 </button>
               </form>
             </motion.div>
